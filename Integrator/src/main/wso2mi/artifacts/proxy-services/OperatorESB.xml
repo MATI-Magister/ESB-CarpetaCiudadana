@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="OperatorESB" startOnLoad="true" transports="http https" xmlns="http://ws.apache.org/ns/synapse">
+	<target>
+		<inSequence>
+			<log category="INFO" level="full"/>
+			<payloadFactory media-type="json" template-type="default">
+				<format>{
+					"IdIntegration":"iudhgfdsiuha",
+					"State":"INICIAL",
+					"IdUser":"bugruywaiuoas",
+					"IdOperatorOrigen":"oijsdfjkodfsihjo",
+					"IdOperatorDestino":"Hola"
+					}</format>
+				<args>
+				</args>
+			</payloadFactory>
+			<respond/>
+		</inSequence>
+		<outSequence>
+		</outSequence>
+		<faultSequence/>
+	</target>
+	<publishWSDL preservePolicy="true">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://digitalwolf:8290/services/OperatorESB"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             name="OperatorESBService"
+             targetNamespace="http://digitalwolf:8290/services/OperatorESB">
+    <types>
+        <xsd:schema targetNamespace="http://digitalwolf:8290/services/OperatorESB">
+            <xsd:element name="TransferOperatorRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="IdIntegration" type="xsd:string"/>
+                        <xsd:element name="State" type="xsd:string"/>
+                        <xsd:element name="IdUser" type="xsd:string"/>
+                        <xsd:element name="IdOperatorOrigen" type="xsd:string"/>
+                        <xsd:element name="IdOperatorDestino" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="TransferOperatorResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="IdIntegration" type="xsd:string"/>
+                        <xsd:element name="State" type="xsd:string"/>
+                        <xsd:element name="IdUser" type="xsd:string"/>
+                        <xsd:element name="IdOperatorOrigen" type="xsd:string"/>
+                        <xsd:element name="IdOperatorDestino" type="xsd:string"/>
+                        <xsd:element name="Values" type="xsd:string"/> <!-- Assuming Dictionary is represented as a string -->
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+    <message name="TransferOperatorRequest">
+        <part name="parameters" element="tns:TransferOperatorRequest"/>
+    </message>
+    <message name="TransferOperatorResponse">
+        <part name="parameters" element="tns:TransferOperatorResponse"/>
+    </message>
+    <portType name="OperatorESBPortType">
+        <operation name="TransferOperator">
+            <input message="tns:TransferOperatorRequest"/>
+            <output message="tns:TransferOperatorResponse"/>
+        </operation>
+    </portType>
+    <binding name="OperatorESBBinding" type="tns:OperatorESBPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <operation name="TransferOperator">
+            <soap:operation soapAction="TransferOperator"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="OperatorESBService">
+        <port name="OperatorESBPort" binding="tns:OperatorESBBinding">
+            <soap:address location="http://digitalwolf:8290/services/OperatorESB"/>
+        </port>
+    </service>
+</definitions>
+	</publishWSDL>
+</proxy>
