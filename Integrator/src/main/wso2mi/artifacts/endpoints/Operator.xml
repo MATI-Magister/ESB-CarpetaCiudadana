@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoint name="Operator" xmlns="http://ws.apache.org/ns/synapse">
-	<wsdl port="BasicHttpBinding_IServiceOperator" service="ServiceOperator" uri="http://localhost:55044/ServiceOperator.svc?wsdl">
+	<wsdl port="BasicHttpBinding_IServiceOperator" service="ServiceOperator" uri="http://www.dev-diode.xyz/OOSOAP/ServiceOperator.svc?wsdl">
 		<suspendOnFailure>
 			<initialDuration>-1</initialDuration>
 			<progressionFactor>1</progressionFactor>

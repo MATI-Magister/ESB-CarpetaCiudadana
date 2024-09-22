@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<proxy name="OperatorESB" startOnLoad="true" transports="http https" xmlns="http://ws.apache.org/ns/synapse">
+<proxy name="MinticESB" startOnLoad="true" transports="http https" xmlns="http://ws.apache.org/ns/synapse">
 	<target>
 		<inSequence>
 			<log category="INFO" level="full"/>
@@ -20,15 +20,15 @@
 		</outSequence>
 		<faultSequence/>
 	</target>
-	<publishWSDL preservePolicy="true">
+    <publishWSDL preservePolicy="true">
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-             xmlns:tns="http://digitalwolf:8290/services/OperatorESB"
+             xmlns:tns="http://DigitalWolf:8290/services/MinticESB"
              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
              name="OperatorESBService"
-             targetNamespace="http://digitalwolf:8290/services/OperatorESB">
+             targetNamespace="http://DigitalWolf:8290/services/MinticESB">
     <types>
-        <xsd:schema targetNamespace="http://digitalwolf:8290/services/OperatorESB">
+        <xsd:schema targetNamespace="http://DigitalWolf:8290/services/MinticESB">
             <xsd:element name="TransferOperatorRequest">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -80,7 +80,7 @@
     </binding>
     <service name="OperatorESBService">
         <port name="OperatorESBPort" binding="tns:OperatorESBBinding">
-            <soap:address location="http://digitalwolf:8290/services/OperatorESB"/>
+            <soap:address location="http://DigitalWolf:8290/services/MinticESB"/>
         </port>
     </service>
 </definitions>

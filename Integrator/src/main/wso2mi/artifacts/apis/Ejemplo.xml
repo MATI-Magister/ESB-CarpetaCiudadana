@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api xmlns="http://ws.apache.org/ns/synapse" name="Ejemplo" context="/default" version="1.0.0" version-type="context">
 	<resource methods="POST" url-mapping="/updateRelationship">
-		<inSequence>
-			<log category="INFO" level="full"/>
-			<property name="REST_URL_POSTFIX" scope="axis2" action="remove"/>
+		<inSequence> 
 			<payloadFactory media-type="xml" template-type="default">
 				<format>
 					<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/" xmlns:oper="http://schemas.datacontract.org/2004/07/Operator" xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -36,12 +34,19 @@
 				</args>
 			</payloadFactory>
 			<header name="Action" action="set" scope="default" value="http://tempuri.org/IServiceOperator/requestTransfer"/>
-			<log category="INFO" level="full"/>
 			<call>
 				<endpoint key="Operator"/>
 			</call>
+			<property name="messageType" value="application/json" scope="axis2" type="STRING"/>
+			<payloadFactory media-type="json" template-type="default">
+				<format>$1</format>
+				<args>
+					<arg expression="$.requestTransferResponse.requestTransferResult" evaluator="json"/>
+				</args>
+			</payloadFactory>
+			
 			<log category="INFO" level="full"/>
-			<property name="messageType" value="application/json" scope="axis2" type="STRING"/><respond/>
+			<respond/>
 		</inSequence><outSequence/><faultSequence/>
 	</resource>
 </api>
