@@ -2,18 +2,45 @@
 <proxy name="OperatorESB" startOnLoad="true" transports="http https" xmlns="http://ws.apache.org/ns/synapse">
 	<target>
 		<inSequence>
+			<property name="messageType" scope="axis2" type="STRING" value="application/json"/>
 			<log category="INFO" level="full"/>
 			<payloadFactory media-type="json" template-type="default">
-				<format>{
-					"IdIntegration":"iudhgfdsiuha",
-					"State":"INICIAL",
-					"IdUser":"bugrudfgfsgdsoas",
-					"IdOperatorOrigen":"oijsdfjkodfsihjo",
-					"IdOperatorDestino":"Hola"
-					}</format>
+				<format>$1</format>
 				<args>
+					<arg expression="$.TransferOperatorRequest" evaluator="json"/>
 				</args>
 			</payloadFactory>
+			<property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+			<log category="INFO" level="full"/>
+			<call>
+				<endpoint key="OperatorDestino"/>
+			</call>
+			<payloadFactory media-type="xml" template-type="default">
+				<format>
+					<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:oper="http://digitalwolf:8290/services/OperatorESB">
+						<soapenv:Header/>
+						<soapenv:Body>
+							<oper:TransferOperatorResponse>
+								<oper:id>$1</oper:id>
+								<oper:idIntegracion>$2</oper:idIntegracion>
+								<oper:estado>$3</oper:estado>
+								<oper:idUser>$4</oper:idUser>
+								<oper:idOperatorOrigen>$5</oper:idOperatorOrigen>
+								<oper:idOperadorDestino>$6</oper:idOperadorDestino>
+							</oper:TransferOperatorResponse>
+						</soapenv:Body>
+					</soapenv:Envelope>
+				</format>
+				<args>
+					<arg expression="$.id" evaluator="json"/>
+					<arg expression="$.idIntegracion" evaluator="json"/>
+					<arg expression="$.estado" evaluator="json"/>
+					<arg expression="$.idUser" evaluator="json"/>
+					<arg expression="$.idOperatorOrigen" evaluator="json"/>
+					<arg expression="$.idOperadorDestino" evaluator="json"/>
+				</args>
+			</payloadFactory>
+			<log category="INFO" level="full"/>
 			<respond/>
 		</inSequence>
 		<outSequence>
@@ -32,23 +59,26 @@
             <xsd:element name="TransferOperatorRequest">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="IdIntegration" type="xsd:string"/>
-                        <xsd:element name="State" type="xsd:string"/>
-                        <xsd:element name="IdUser" type="xsd:string"/>
-                        <xsd:element name="IdOperatorOrigen" type="xsd:string"/>
-                        <xsd:element name="IdOperatorDestino" type="xsd:string"/>
+                        <xsd:element name="id" type="xsd:string"/>
+                        <xsd:element name="idIntegracion" type="xsd:string"/>
+                        <xsd:element name="estado" type="xsd:string"/>
+                        <xsd:element name="idUser" type="xsd:string"/>
+                        <xsd:element name="idOperatorOrigen" type="xsd:string"/>
+                        <xsd:element name="idOperadorDestino" type="xsd:string"/>
+                        <xsd:element name="values" type="xsd:string"/> 
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
             <xsd:element name="TransferOperatorResponse">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="IdIntegration" type="xsd:string"/>
-                        <xsd:element name="State" type="xsd:string"/>
-                        <xsd:element name="IdUser" type="xsd:string"/>
-                        <xsd:element name="IdOperatorOrigen" type="xsd:string"/>
-                        <xsd:element name="IdOperatorDestino" type="xsd:string"/>
-                        <xsd:element name="Values" type="xsd:string"/> <!-- Assuming Dictionary is represented as a string -->
+                        <xsd:element name="id" type="xsd:string"/>
+                        <xsd:element name="idIntegracion" type="xsd:string"/>
+                        <xsd:element name="estado" type="xsd:string"/>
+                        <xsd:element name="idUser" type="xsd:string"/>
+                        <xsd:element name="idOperatorOrigen" type="xsd:string"/>
+                        <xsd:element name="idOperadorDestino" type="xsd:string"/>
+                        <xsd:element name="values" type="xsd:string"/> 
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoint name="OperatorDestino" xmlns="http://ws.apache.org/ns/synapse">
+	<http method="put" trace="enable" uri-template="http://dev-diode.xyz/operator/api/TransactionTransfer">
+		<suspendOnFailure>
+			<initialDuration>-1</initialDuration>
+			<progressionFactor>1</progressionFactor>
+		</suspendOnFailure>
+		<markForSuspension>
+			<retriesBeforeSuspension>0</retriesBeforeSuspension>
+		</markForSuspension>
+		<authentication>
+			<oauth>
+				<clientCredentials>
+					<clientId>client</clientId>
+					<clientSecret>secret</clientSecret>
+					<tokenUrl>http://dev-diode.xyz/authoperator/connect/token</tokenUrl>
+					<requestParameters>
+						<parameter name="Scope">api1</parameter>
+					</requestParameters>
+					<authMode>Header</authMode>
+				</clientCredentials>
+			</oauth>
+		</authentication>
+	</http>
+</endpoint>

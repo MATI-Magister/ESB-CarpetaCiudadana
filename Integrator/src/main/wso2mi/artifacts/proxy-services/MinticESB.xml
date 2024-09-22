@@ -2,18 +2,19 @@
 <proxy name="MinticESB" startOnLoad="true" transports="http https" xmlns="http://ws.apache.org/ns/synapse">
 	<target>
 		<inSequence>
+			<property name="messageType" value="application/json" scope="axis2" type="STRING"/>
 			<log category="INFO" level="full"/>
 			<payloadFactory media-type="json" template-type="default">
-				<format>{
-					"IdIntegration":"iudhgfdsiuha",
-					"State":"INICIAL",
-					"IdUser":"bugrudfgfsgdsoas",
-					"IdOperatorOrigen":"oijsdfjkodfsihjo",
-					"IdOperatorDestino":"Hola"
-					}</format>
+				<format>$1</format>
 				<args>
+					<arg expression="$.TransferOperatorRequest" evaluator="json"/>
 				</args>
 			</payloadFactory>
+			<log category="INFO" level="full"/>
+			<call>
+				<endpoint key="MinTIC"/>
+			</call>
+			<log category="INFO" level="full"/>
 			<respond/>
 		</inSequence>
 		<outSequence>
@@ -32,23 +33,26 @@
             <xsd:element name="TransferOperatorRequest">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="IdIntegration" type="xsd:string"/>
-                        <xsd:element name="State" type="xsd:string"/>
-                        <xsd:element name="IdUser" type="xsd:string"/>
-                        <xsd:element name="IdOperatorOrigen" type="xsd:string"/>
-                        <xsd:element name="IdOperatorDestino" type="xsd:string"/>
+                        <xsd:element name="id" type="xsd:string"/>
+                        <xsd:element name="idIntegracion" type="xsd:string"/>
+                        <xsd:element name="estado" type="xsd:string"/>
+                        <xsd:element name="idUser" type="xsd:string"/>
+                        <xsd:element name="idOperatorOrigen" type="xsd:string"/>
+                        <xsd:element name="idOperadorDestino" type="xsd:string"/>
+                        <xsd:element name="values" type="xsd:string"/> 
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
             <xsd:element name="TransferOperatorResponse">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="IdIntegration" type="xsd:string"/>
-                        <xsd:element name="State" type="xsd:string"/>
-                        <xsd:element name="IdUser" type="xsd:string"/>
-                        <xsd:element name="IdOperatorOrigen" type="xsd:string"/>
-                        <xsd:element name="IdOperatorDestino" type="xsd:string"/>
-                        <xsd:element name="Values" type="xsd:string"/> <!-- Assuming Dictionary is represented as a string -->
+                        <xsd:element name="id" type="xsd:string"/>
+                        <xsd:element name="idIntegracion" type="xsd:string"/>
+                        <xsd:element name="estado" type="xsd:string"/>
+                        <xsd:element name="idUser" type="xsd:string"/>
+                        <xsd:element name="idOperatorOrigen" type="xsd:string"/>
+                        <xsd:element name="idOperadorDestino" type="xsd:string"/>
+                        <xsd:element name="values" type="xsd:string"/> <!-- Assuming Dictionary is represented as a string -->
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>

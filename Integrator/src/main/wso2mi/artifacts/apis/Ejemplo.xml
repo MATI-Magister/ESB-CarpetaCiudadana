@@ -44,8 +44,6 @@
 					<arg expression="$.requestTransferResponse.requestTransferResult" evaluator="json"/>
 				</args>
 			</payloadFactory>
-			
-			<log category="INFO" level="full"/>
 			<respond/>
 		</inSequence><outSequence/><faultSequence/>
 	</resource>
