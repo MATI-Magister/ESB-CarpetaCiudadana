@@ -37,6 +37,7 @@
 			<call>
 				<endpoint key="Operator"/>
 			</call>
+			<log category="INFO" level="full"/>
 			<property name="messageType" value="application/json" scope="axis2" type="STRING"/>
 			<payloadFactory media-type="json" template-type="default">
 				<format>$1</format>
@@ -44,6 +45,7 @@
 					<arg expression="$.requestTransferResponse.requestTransferResult" evaluator="json"/>
 				</args>
 			</payloadFactory>
+			<log category="INFO" level="full"/>
 			<respond/>
 		</inSequence><outSequence/><faultSequence/>
 	</resource>

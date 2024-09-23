@@ -14,6 +14,31 @@
 			<call>
 				<endpoint key="MinTIC"/>
 			</call>
+			<payloadFactory media-type="xml" template-type="default">
+				<format>
+					<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:oper="http://digitalwolf:8290/services/OperatorESB">
+						<soapenv:Header/>
+						<soapenv:Body>
+							<oper:TransferOperatorResponse>
+								<oper:id>$1</oper:id>
+								<oper:idIntegracion>$2</oper:idIntegracion>
+								<oper:estado>$3</oper:estado>
+								<oper:idUser>$4</oper:idUser>
+								<oper:idOperatorOrigen>$5</oper:idOperatorOrigen>
+								<oper:idOperadorDestino>$6</oper:idOperadorDestino>
+							</oper:TransferOperatorResponse>
+						</soapenv:Body>
+					</soapenv:Envelope>
+				</format>
+				<args>
+					<arg expression="$.id" evaluator="json"/>
+					<arg expression="$.idIntegracion" evaluator="json"/>
+					<arg expression="$.estado" evaluator="json"/>
+					<arg expression="$.idUser" evaluator="json"/>
+					<arg expression="$.idOperatorOrigen" evaluator="json"/>
+					<arg expression="$.idOperadorDestino" evaluator="json"/>
+				</args>
+			</payloadFactory>
 			<log category="INFO" level="full"/>
 			<respond/>
 		</inSequence>
