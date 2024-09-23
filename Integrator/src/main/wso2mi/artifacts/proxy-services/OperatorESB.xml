@@ -10,7 +10,7 @@
 					<arg expression="$.TransferOperatorRequest" evaluator="json"/>
 				</args>
 			</payloadFactory>
-			<property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+			<property name="messageType" scope="axis2" type="STRING" value="text/json"/>
 			<log category="INFO" level="full"/>
 			<call>
 				<endpoint key="OperatorDestino"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api xmlns="http://ws.apache.org/ns/synapse" name="Ejemplo" context="/default" version="1.0.0" version-type="context">
 	<resource methods="POST" url-mapping="/updateRelationship">
-		<inSequence> 
+		<inSequence>
 			<payloadFactory media-type="xml" template-type="default">
 				<format>
 					<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/" xmlns:oper="http://schemas.datacontract.org/2004/07/Operator" xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -9,31 +9,28 @@
 						<soapenv:Body>
 							<tem:requestTransfer>
 								<tem:transfer>
-									<oper:IdIntegration>$1</oper:IdIntegration>
-									<oper:IdOperatorDestino>$5</oper:IdOperatorDestino>
-									<oper:IdOperatorOrigen>$4</oper:IdOperatorOrigen>
-									<oper:IdUser>$3</oper:IdUser>
-									<oper:State>$2</oper:State>
-									<oper:Values>
-										<arr:KeyValueOfstringstring>
-											<arr:Key>?</arr:Key>
-											<arr:Value>?</arr:Value>
-										</arr:KeyValueOfstringstring>
-									</oper:Values>
+									<oper:id>$6</oper:id>
+									<oper:idIntegration>$1</oper:idIntegration>
+									<oper:idOperatorDestino>$5</oper:idOperatorDestino>
+									<oper:idOperatorOrigen>$4</oper:idOperatorOrigen>
+									<oper:idUser>$3</oper:idUser>
+									<oper:estado>$2</oper:estado>
 								</tem:transfer>
 							</tem:requestTransfer>
 						</soapenv:Body>
 					</soapenv:Envelope>
 				</format>
 				<args>
-					<arg expression="$.IdIntegration" evaluator="json"/>
-					<arg expression="$.State" evaluator="json"/>
-					<arg expression="$.IdUser" evaluator="json"/>
-					<arg expression="$.IdOperatorOrigen" evaluator="json"/>
-					<arg expression="$.IdOperatorDestino" evaluator="json"/>
+					<arg expression="$.idIntegracion" evaluator="json"/>
+					<arg expression="$.estado" evaluator="json"/>
+					<arg expression="$.idUser" evaluator="json"/>
+					<arg expression="$.idOperatorOrigen" evaluator="json"/>
+					<arg expression="$.idOperadorDestino" evaluator="json"/>
+					<arg expression="$.id" evaluator="json"/>
 				</args>
 			</payloadFactory>
 			<header name="Action" action="set" scope="default" value="http://tempuri.org/IServiceOperator/requestTransfer"/>
+			<log category="INFO" level="full"/>
 			<call>
 				<endpoint key="Operator"/>
 			</call>
