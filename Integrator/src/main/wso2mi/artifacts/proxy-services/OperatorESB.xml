@@ -56,31 +56,20 @@
              targetNamespace="http://digitalwolf:8290/services/OperatorESB">
     <types>
         <xsd:schema targetNamespace="http://digitalwolf:8290/services/OperatorESB">
-            <xsd:element name="TransferOperatorRequest">
-                <xsd:complexType>
+            <xsd:complexType name="TransferOperatorType">
                     <xsd:sequence>
-                        <xsd:element name="id" type="xsd:string"/>
-                        <xsd:element name="idIntegracion" type="xsd:string"/>
-                        <xsd:element name="estado" type="xsd:string"/>
-                        <xsd:element name="idUser" type="xsd:string"/>
-                        <xsd:element name="idOperatorOrigen" type="xsd:string"/>
-                        <xsd:element name="idOperadorDestino" type="xsd:string"/>
-                        <xsd:element name="values" type="xsd:string"/> 
-                    </xsd:sequence>
-                </xsd:complexType>
+                    <xsd:element name="id" type="xsd:string"/>
+                    <xsd:element name="idIntegracion" type="xsd:string"/>
+                    <xsd:element name="estado" type="xsd:string"/>
+                    <xsd:element name="idUser" type="xsd:string"/>
+                    <xsd:element name="idOperatorOrigen" type="xsd:string"/>
+                    <xsd:element name="idOperadorDestino" type="xsd:string"/>
+                    <xsd:element name="values" type="xsd:string"/> 
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="TransferOperatorRequest" type="tns:TransferOperatorType">
             </xsd:element>
-            <xsd:element name="TransferOperatorResponse">
-                <xsd:complexType>
-                    <xsd:sequence>
-                        <xsd:element name="id" type="xsd:string"/>
-                        <xsd:element name="idIntegracion" type="xsd:string"/>
-                        <xsd:element name="estado" type="xsd:string"/>
-                        <xsd:element name="idUser" type="xsd:string"/>
-                        <xsd:element name="idOperatorOrigen" type="xsd:string"/>
-                        <xsd:element name="idOperadorDestino" type="xsd:string"/>
-                        <xsd:element name="values" type="xsd:string"/> 
-                    </xsd:sequence>
-                </xsd:complexType>
+            <xsd:element name="TransferOperatorResponse" type="tns:TransferOperatorType">
             </xsd:element>
         </xsd:schema>
     </types>
